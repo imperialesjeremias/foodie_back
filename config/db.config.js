@@ -1,10 +1,11 @@
+require('dotenv').config();
 const Sequelize = require('sequelize');
 
-const dbPort = 3306;
-const dbName = 'foodie_db_test';
-const dbUser = 'root';
-const dbPassword = '2215379448Ji';
-const dbHost = 'localhost';
+const dbPort = process.env.DB_PORT;
+const dbName = process.env.DB_NAME;
+const dbUser = process.env.DB_USER;
+const dbPassword = process.env.DB_PASS;
+const dbHost = process.env.DB_HOST;
 
 
 const sequelize = new Sequelize(
