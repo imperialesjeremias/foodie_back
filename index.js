@@ -5,7 +5,7 @@ const { dbConnection, sequelize } = require('./config/db.config');  // importamo
 const cors = require('cors');                                       // importamos cors para permitir peticiones desde cualquier origen
 const { default: helmet } = require('helmet');                      // importamos helmet para proteger cabeceras y vulnerabilidades HTTP
 
-app.use(cors());                                                    // habilitamos cors
+app.use(cors('*'));                                                    // habilitamos cors
 app.use(bodyParser.json());                                         // parse applicacion/json
 app.use(bodyParser.urlencoded({ extended: true }));                 // parse applicacion/x-www-form-urlencoded
 app.use(helmet());                                                  // proteccion de cabeceras y vulnerabilidades HTTP
@@ -13,11 +13,13 @@ app.use(helmet());                                                  // proteccio
 
 const apiRouter = express.Router();                                 // instanciamos el router de express
 const userRouter = require('./routes/models.routes');                 // importamos el router de usuarios
+const restaurantRouter = require('./routes/restaurant.routes');      // importamos el router de restaurantes
 app.use('/api', apiRouter);
 apiRouter.use('/u', userRouter);
+apiRouter.use('/restaurants', restaurantRouter);
 
 app.listen(3000, () => {
-    sequelize.sync({ force: false, match: /_test$/ }).then(() => {
+    sequelize.sync({alter: false ,force: false, match: /_test$/ }).then(() => {
         console.log('Database connected');
     })
     dbConnection();
