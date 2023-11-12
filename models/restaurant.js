@@ -15,7 +15,11 @@ const Restaurant = sequelize.define(
         schedule: {
             type: DataTypes.STRING,
             allowNull: false
-        }
+        },
+        averageRating: {
+            type: DataTypes.FLOAT,
+            allowNull: true
+        },
     },
     {
         timestamps: false, // timestamps false para que no agregue las columnas de created y updated 

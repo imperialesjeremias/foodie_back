@@ -6,11 +6,13 @@ const {sequelize} = require('../config/db.config');
         {
             firstName: {
                 type: DataTypes.STRING,
-                allowNull: false // no puede ser nula la columna
+                allowNull: true,
+                defaultValue: ''
             },
             lastName: {
                 type: DataTypes.STRING,
-                allowNull: false
+                defaultValue: '',
+                allowNull: true
             },
             email: {
                 type: DataTypes.STRING,

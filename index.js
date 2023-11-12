@@ -10,7 +10,6 @@ app.use(bodyParser.json());                                         // parse app
 app.use(bodyParser.urlencoded({ extended: true }));                 // parse applicacion/x-www-form-urlencoded
 app.use(helmet());                                                  // proteccion de cabeceras y vulnerabilidades HTTP
 
-
 const apiRouter = express.Router();                                 // instanciamos el router de express
 const userRouter = require('./routes/models.routes');                 // importamos el router de usuarios
 const restaurantRouter = require('./routes/restaurant.routes');      // importamos el router de restaurantes
