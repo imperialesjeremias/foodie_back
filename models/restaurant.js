@@ -16,6 +16,10 @@ const Restaurant = sequelize.define(
             type: DataTypes.STRING,
             allowNull: false
         },
+        category: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
         averageRating: {
             type: DataTypes.FLOAT,
             allowNull: true

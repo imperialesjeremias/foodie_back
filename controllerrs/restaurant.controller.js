@@ -2,20 +2,6 @@ const Restaurant = require('../models/restaurant');
 const UserRating = require('../models/userRating.model');
 
 const restaurantController = {
-    getAll: async (req, res) => {
-        try {
-            const restaurant = await Restaurant.findAll();
-            res.status(200).json({
-                message: 'Lista de restaurantes',
-                data: restaurant
-            })
-        } catch (error) {
-            res.status(400).json({
-                message: 'Error al obtener la lista de restaurantes',
-                data: error
-            })
-        }
-    },
     getById: async (req, res) => {
         try {
             // obetener restaurant por id
@@ -100,5 +86,50 @@ const restaurantController = {
             averageRating
         });
     },
+    getBestRest: async (req, res) => {
+        try {
+            const topRest = await Restaurant.findAll({
+                attributes: ['id', 'name', 'averageRating'],
+                order: [['averageRating', 'DESC']],
+                limit: 6,
+            });
+    
+            if (topRest.length === 0) {
+                return res.status(404).json({ message: 'No hay restaurantes top' });
+            }
+    
+            console.log(topRest);  // Mover este console.log antes de la respuesta al cliente si es necesario
+    
+            res.status(200).json({
+                message: 'Top 6 de restaurantes',
+                data: topRest
+            });
+        } catch (error) {
+            console.error(error);
+            res.status(500).json({
+                message: 'Error al obtener el top 10 de restaurantes',
+                data: error
+            });
+        }
+    },
+    getByCategory: async (req, res) => {
+        try {
+            const { category } = req.params;
+            console.log(category)
+            const restaurants = await Restaurant.findAll({
+                where: { category: category },
+                attributes: ['id', 'name', 'averageRating'],
+            });
+            res.status(200).json({
+                message: 'Restaurantes por categoria',
+                data: restaurants
+            });
+        } catch (error) {
+            res.status(404).json({
+                message: 'No hay restaurantes en esta categoria',
+                data: error
+            })
+        }
+    }
 };
 module.exports = restaurantController;
