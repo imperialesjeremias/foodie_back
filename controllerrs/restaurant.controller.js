@@ -24,7 +24,9 @@ const restaurantController = {
         try {
             const restaurantId = req.params.id;
             const restaurant = await Restaurant.findByPk(restaurantId, { include: ['platos'] });
+            console.log('platosss',restaurant.dataValues)
             !restaurant && res.status(404).json({ message: 'Plato de restaurantes encontrados' });
+
             res.status(200).json({
                 message: 'Platos del restaurante',
                 data: restaurant
