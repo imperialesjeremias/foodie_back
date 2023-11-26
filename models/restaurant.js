@@ -1,5 +1,7 @@
 const { DataTypes } = require('sequelize');
 const {sequelize} = require('../config/db.config');
+const { plato } = require('./platos');
+const Comment = require('./comment.model');
 
 const Restaurant = sequelize.define(
     'restaurant',
@@ -30,7 +32,7 @@ const Restaurant = sequelize.define(
     }
 );
 
+Restaurant.hasMany(plato, { as: 'platos', foreignKey: 'restaurantId' });
+Restaurant.hasMany(Comment, { as: 'comments', foreignKey: 'restaurantId' });
 
 module.exports = Restaurant;
-const { plato } = require('./platos');
-Restaurant.hasMany(plato, { as: 'platos', foreignKey: 'restaurantId'});

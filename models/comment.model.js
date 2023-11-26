@@ -1,7 +1,7 @@
 const { DataTypes } = require("sequelize");
 const { sequelize } = require("../config/db.config");
 
-const comment = sequelize.define(
+const Comment = sequelize.define(
   "comment",
   {
     usuarioId: {
@@ -18,6 +18,4 @@ const comment = sequelize.define(
   }
 );
 
-module.exports = {
-  comentario,
-};
+module.exports = Comment;

@@ -1,4 +1,4 @@
-const comment = require("../models/comment.model");
+const Comment = require('../models/comment.model');
 
 const commentController = {
 getComentarios: async (req, res) => {
@@ -11,14 +11,32 @@ getComentarios: async (req, res) => {
 },
 createComentario: async (req, res) => {
   try {
-    const data = req.body;
-    const result = await comment.create({ data });
-    return {
-      status: 201,
-      result,
-    };
+    console.log(req.body);
+    const { id, description, restaurantId } = req.body;
+    console.log(id, description, restaurantId);
+
+    if (!id || !description || !restaurantId) {
+      return res.status(400).json({
+        status: 400,
+        message: "Missing information",
+      });
+    }
+
+    const comment = await Comment.create({
+      usuarioId: id,
+      description: description,
+      restaurantId: restaurantId
+    });
+
+    return res.status(201).json({
+      comment: comment,
+    });
   } catch (e) {
-    throw new Error(e);
+    console.error(e);
+    return res.status(500).json({
+      status: 500,
+      message: "Internal Server Error",
+    });
   }
 },
 editComentario: async (req, res) => {
