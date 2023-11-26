@@ -7,11 +7,11 @@ const {sequelize} = require('../config/db.config');
             firstName: {
                 type: DataTypes.STRING,
                 allowNull: true,
-                defaultValue: ''
+                defaultValue: 'User'
             },
             lastName: {
                 type: DataTypes.STRING,
-                defaultValue: '',
+                defaultValue: 'Foodie',
                 allowNull: true
             },
             email: {

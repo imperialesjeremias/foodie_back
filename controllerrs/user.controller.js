@@ -70,6 +70,55 @@ const userController = {
             data: error
          });
     }
+  },
+  editProfile: async (req, res) => {
+    try {
+      const { email, firstName, lastName, password } = req.body;
+      console.log(email, firstName, lastName, password);
+
+      const user = await User.findOne({ where: { email } });  
+      if (!user) {
+        return res.status(404).json({ message: "No se encuentra al usuario" });
+      }
+
+      const comparePassword = bcrypt.compareSync(password, user.password);
+      if (!comparePassword) {
+        return res.status(400).json({ message: "Contraseña incorrecta" });
+      }
+
+      const userUpdate = await user.update({
+        firstName: firstName,
+        lastName: lastName
+      });
+
+      console.log(userUpdate);
+      return res.status(200).json({
+        message: "Usuario Actualizado",
+        userUpdate
+      })
+    } catch (error) {
+      return res.status(500).json({ message: error})
+    }
+  },
+  getData: async (req, res) => {
+    try {
+      const { email } = req.body;
+      const userData = await User.findOne({
+          where: { email },
+          attributes: ['firstName', 'lastName', 'email'],
+      });
+
+      if (!userData) {
+          return res.status(404).json({ message: "No se encuentra al usuario" });
+      }
+
+      return res.status(200).json({
+          message: "Datos del usuario",
+          userData
+      });
+    } catch (error) {
+      res.status(500).json({ message: "Error", error})
+    }
   }
 };
 
