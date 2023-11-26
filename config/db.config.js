@@ -14,7 +14,7 @@ const sequelize = new Sequelize(
     dbPassword, {
     dbHost,
     dbPort,
-    dialect: 'postgres',
+    dialect: 'mysql',
     define: {
         timestamps: false, // Para evitar la creación de columnas de fecha automática
         freezeTableName: true, // Para evitar la pluralización de nombres de tablas

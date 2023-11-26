@@ -1,17 +1,18 @@
-const comentario = require("../models/comentarios");
+const comment = require("../models/comment.model");
 
-export const getComentarios = async (req, res) => {
+const commentController = {
+getComentarios: async (req, res) => {
   try {
-    const result = await comentario.findAll();
+    const result = await comment.findAll();
     return result;
   } catch (error) {
     throw new Error(error);
   }
-};
-export const createComentario = async (req, res) => {
+},
+createComentario: async (req, res) => {
   try {
     const data = req.body;
-    const result = await comentario.create({ data });
+    const result = await comment.create({ data });
     return {
       status: 201,
       result,
@@ -19,8 +20,8 @@ export const createComentario = async (req, res) => {
   } catch (e) {
     throw new Error(e);
   }
-};
-export const editComentario = async (req, res) => {
+},
+editComentario: async (req, res) => {
   try {
     const { id } = req.params;
     const { usuarioId, description } = req.body;
@@ -40,15 +41,18 @@ export const editComentario = async (req, res) => {
   } catch (error) {
     throw new Error(e);
   }
-};
-export const deleteComentario = async (req, res) => {
+},
+deleteComentario: async (req, res) => {
   try {
     const { id } = req.params;
-    await comentario.destroy({
+    await comment.destroy({
       where: {
         id: id,
       },
     });
   } catch (error) {}
   throw new Error(e);
-};
+},
+}
+
+module.exports = commentController;

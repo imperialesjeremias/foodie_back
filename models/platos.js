@@ -12,14 +12,14 @@ const plato = sequelize.define(
             type: DataTypes.STRING,
             allowNull: false
         },
+        category: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
         description: {
             type: DataTypes.STRING,
             allowNull: false
         },
-        quantity:{
-            type: DataTypes.INTEGER,
-            allowNull: false
-        }
     },
     {
         timestamps: false, // timestamps false para que no agregue las columnas de created y updated 
