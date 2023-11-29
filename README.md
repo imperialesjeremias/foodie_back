@@ -1,4 +1,12 @@
-[En desarrollo]
+# En desarrollo
+
+### DEVS
+[Imperiales Jeremias](https://www.linkedin.com/in/jeremiasleonimperiales)
+
+[Ivan Venegas](https://www.linkedin.com/in/ivan-venegas-81225217)
+
+[Gonzalo Delvalle](https://www.linkedin.com/in/gonzalodelvalle)
+
 # Proyecto Final Fundación Pescar - Santander - Documentación
 Este proyecto contiene el backend para usar la aplicación de Foodie utilizando
 NodeJs-Express y SQL usando Sequelize como ORM.
