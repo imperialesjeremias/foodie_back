@@ -1,9 +1,11 @@
+require('dotenv').config();
 const express = require('express');                                 // importamos express
 const app = express();                                              // instanciamos express
 const bodyParser = require('body-parser');                          // importamos body-parser   
 const { dbConnection, sequelize } = require('./config/db.config');  // importamos la conexion a la base de datos
 const cors = require('cors');                                       // importamos cors para permitir peticiones desde cualquier origen
 const { default: helmet } = require('helmet');                      // importamos helmet para proteger cabeceras y vulnerabilidades HTTP
+const PORT = process.env.PORT || 3000
 
 app.use(cors('*'));                                                    // habilitamos cors
 app.use(bodyParser.json());                                         // parse applicacion/json
@@ -17,8 +19,8 @@ app.use('/api', apiRouter);
 apiRouter.use('/u', userRouter);
 apiRouter.use('/restaurants', restaurantRouter);
 
-app.listen(3000, () => {
-    sequelize.sync({alter: false ,force: false, match: /_test$/ }).then(() => {
+app.listen(PORT, () => {
+    sequelize.sync({alter: false ,force: false}).then(() => {
         console.log('Database connected');
     })
     dbConnection();
